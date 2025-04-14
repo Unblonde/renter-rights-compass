@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,20 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// GOV.UK colors
+				govuk: {
+					blue: '#1d70b8',
+					darkblue: '#003078',
+					lightblue: '#5694ca',
+					black: '#0b0c0c',
+					darkgrey: '#505a5f',
+					midgrey: '#b1b4b6',
+					lightgrey: '#f3f2f1',
+					white: '#ffffff',
+					red: '#d4351c',
+					green: '#00703c',
+					yellow: '#ffdd00',
 				}
 			},
 			borderRadius: {
