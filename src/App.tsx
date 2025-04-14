@@ -10,6 +10,9 @@ import LandlordDashboard from "./pages/LandlordDashboard";
 import AuthorityDashboard from "./pages/AuthorityDashboard";
 import PropertyDetails from "./pages/PropertyDetails";
 import DocumentUpload from "./pages/DocumentUpload";
+import Information from "./pages/Information";
+import QuickAnswers from "./pages/QuickAnswers";
+import AnswerDetail from "./pages/AnswerDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +30,9 @@ const App = () => (
           <Route path="/authority" element={<AuthorityDashboard />} />
           <Route path="/property/:id" element={<PropertyDetails />} />
           <Route path="/landlord/document/:id" element={<DocumentUpload />} />
+          <Route path="/information" element={<Information />} />
+          <Route path="/information/quick-answers" element={<QuickAnswers />} />
+          <Route path="/information/quick-answers/:id" element={<AnswerDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
