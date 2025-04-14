@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { Map, VolumeUp, Volume2, Eye } from 'lucide-react';
+import { Map, Volume, Volume2, Eye } from 'lucide-react';
 
 interface StreetViewProps {
   address: string;
@@ -8,9 +8,15 @@ interface StreetViewProps {
   lng?: number;
 }
 
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
 const StreetView: React.FC<StreetViewProps> = ({ address, lat = 51.5074, lng = -0.1278 }) => {
   const streetViewRef = useRef<HTMLDivElement>(null);
-  const panoramaRef = useRef<google.maps.StreetViewPanorama | null>(null);
+  const panoramaRef = useRef<any>(null);
   const [audioEnabled, setAudioEnabled] = React.useState(false);
   const [streetViewAvailable, setStreetViewAvailable] = React.useState(true);
 
@@ -33,15 +39,15 @@ const StreetView: React.FC<StreetViewProps> = ({ address, lat = 51.5074, lng = -
   const initializeStreetView = () => {
     if (!streetViewRef.current) return;
 
-    const streetViewService = new google.maps.StreetViewService();
-    const position = new google.maps.LatLng(lat, lng);
+    const streetViewService = new window.google.maps.StreetViewService();
+    const position = new window.google.maps.LatLng(lat, lng);
 
     streetViewService.getPanorama(
       { location: position, radius: 50 },
-      (data, status) => {
-        if (status === google.maps.StreetViewStatus.OK) {
+      (data: any, status: any) => {
+        if (status === window.google.maps.StreetViewStatus.OK) {
           setStreetViewAvailable(true);
-          const panorama = new google.maps.StreetViewPanorama(
+          const panorama = new window.google.maps.StreetViewPanorama(
             streetViewRef.current as HTMLElement,
             {
               position: data.location.latLng,
@@ -84,7 +90,7 @@ const StreetView: React.FC<StreetViewProps> = ({ address, lat = 51.5074, lng = -
           className="flex items-center gap-2 text-govuk-blue" 
           aria-label={audioEnabled ? "Disable audio description" : "Enable audio description"}
         >
-          {audioEnabled ? <VolumeUp className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+          {audioEnabled ? <Volume className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
           {audioEnabled ? "Disable audio" : "Enable audio"}
         </button>
       </div>
