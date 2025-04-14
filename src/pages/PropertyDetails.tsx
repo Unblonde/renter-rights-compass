@@ -9,6 +9,9 @@ import GovUkBreadcrumbs from '../components/GovUkBreadcrumbs';
 import GovUkButton from '../components/GovUkButton';
 import ComplianceItem from '../components/ComplianceItem';
 import ChatbotWidget from '../components/ChatbotWidget';
+import StreetView from '../components/StreetView';
+
+type ComplianceStatus = 'compliant' | 'non-compliant' | 'pending';
 
 const PropertyDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -21,7 +24,7 @@ const PropertyDetails = () => {
     landlordId: 'LL78901',
     registrationDate: '10 January 2024',
     lastInspection: '15 March 2025',
-    compliance: 'compliant' as const,
+    compliance: 'compliant' as ComplianceStatus,
     documents: [
       {
         title: 'Energy Performance Certificate (EPC)',
@@ -137,6 +140,9 @@ const PropertyDetails = () => {
             </div>
           </div>
         </div>
+        
+        {/* Street View integration */}
+        <StreetView address={property.address} />
         
         <div className="govuk-section">
           <h2 className="govuk-heading-m">Compliance Documents</h2>

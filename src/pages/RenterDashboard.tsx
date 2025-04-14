@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Building, AlertTriangle, Info } from 'lucide-react';
+import { Search, Building, AlertTriangle, Info, Map } from 'lucide-react';
 import GovUkHeader from '../components/GovUkHeader';
 import GovUkFooter from '../components/GovUkFooter';
 import GovUkPhaseTag from '../components/GovUkPhaseTag';
@@ -120,9 +120,12 @@ const RenterDashboard = () => {
             </div>
             
             <div className="govuk-card">
-              <h3 className="font-bold text-lg mb-2">Rental deposit protection</h3>
-              <p className="mb-4">Your deposit must be protected in a government-approved scheme. Check if yours is protected.</p>
-              <Link to="/renter/deposit-guide" className="govuk-link">Deposit protection guide</Link>
+              <h3 className="font-bold text-lg mb-2">View properties with Street View</h3>
+              <p className="mb-4">You can now view the exterior of properties using Street View to get a better understanding of the location.</p>
+              <div className="flex items-center gap-1">
+                <Map className="h-4 w-4" />
+                <span>Available on property detail pages</span>
+              </div>
             </div>
           </div>
         </div>
