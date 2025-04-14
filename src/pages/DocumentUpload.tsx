@@ -26,7 +26,7 @@ const DocumentUpload = () => {
     requirements: [
       'Must be completed by a Gas Safe registered engineer',
       'Must have been issued within the last 12 months',
-      'Must include the engineer's Gas Safe registration number',
+      'Must include the engineer\'s Gas Safe registration number', // Note the backslash before the apostrophe
       'Must list all gas appliances in the property'
     ]
   };
