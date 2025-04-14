@@ -12,7 +12,7 @@ interface StreetViewProps {
 declare global {
   interface Window {
     google: any;
-    initGoogleMaps: () => void;
+    initializeStreetView: () => void;
   }
 }
 
@@ -25,62 +25,11 @@ const StreetView: React.FC<StreetViewProps> = ({ address, lat = 51.5074, lng = -
   const [mapsLoaded, setMapsLoaded] = useState(false);
   const [scriptAdded, setScriptAdded] = useState(false);
 
-  useEffect(() => {
-    // Only add the script once
-    if (scriptAdded) return;
-    
-    // Define the callback function that Google Maps will call when loaded
-    window.initGoogleMaps = () => {
-      setMapsLoaded(true);
-      setIsLoading(false);
-    };
-
-    // Load Google Maps API script with async and defer attributes
-    const googleMapsScript = document.createElement('script');
-    googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBGCql6VNQPQgfj8ZJjFB0FTM0YrJhpehQ&libraries=places&callback=initGoogleMaps`;
-    googleMapsScript.async = true;
-    googleMapsScript.defer = true;
-    googleMapsScript.onerror = () => {
-      setIsLoading(false);
-      setStreetViewAvailable(false);
-      toast({
-        title: "Error loading maps",
-        description: "Unable to load Google Maps. Please try again later.",
-        variant: "destructive"
-      });
-    };
-    
-    document.head.appendChild(googleMapsScript);
-    setScriptAdded(true);
-
-    return () => {
-      // Clean up by removing the callback from the window object
-      if (window.initGoogleMaps) {
-        // @ts-ignore - We're intentionally deleting this property
-        delete window.initGoogleMaps;
-      }
-      
-      // Only remove the script if we added it
-      if (scriptAdded) {
-        try {
-          document.head.removeChild(googleMapsScript);
-        } catch (e) {
-          // Script may have already been removed, which is fine
-        }
-      }
-    };
-  }, [scriptAdded]);
-
-  // Initialize street view when maps are loaded
-  useEffect(() => {
-    if (mapsLoaded && streetViewRef.current) {
-      initializeStreetView();
-    }
-  }, [mapsLoaded]);
-
+  // Function to initialize Street View
   const initializeStreetView = () => {
     if (!streetViewRef.current || !window.google || !window.google.maps) {
       setStreetViewAvailable(false);
+      setIsLoading(false);
       return;
     }
 
@@ -119,6 +68,66 @@ const StreetView: React.FC<StreetViewProps> = ({ address, lat = 51.5074, lng = -
       setIsLoading(false);
     }
   };
+
+  // Set up the global callback function
+  useEffect(() => {
+    // Assign the initialization function to the window object
+    window.initializeStreetView = () => {
+      console.log('Maps API loaded, initializing Street View');
+      setMapsLoaded(true);
+      setIsLoading(false);
+      initializeStreetView();
+    };
+
+    return () => {
+      // Clean up
+      if (window.initializeStreetView) {
+        // @ts-ignore - We're intentionally deleting this property
+        delete window.initializeStreetView;
+      }
+    };
+  }, []);
+
+  // Load Google Maps API
+  useEffect(() => {
+    if (scriptAdded) return;
+    
+    const loadMapsApi = () => {
+      // Check if the API is already loaded
+      if (window.google && window.google.maps) {
+        console.log('Google Maps already loaded');
+        setMapsLoaded(true);
+        setIsLoading(false);
+        initializeStreetView();
+        return;
+      }
+
+      console.log('Loading Google Maps API');
+      const googleMapsScript = document.createElement('script');
+      googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBGCql6VNQPQgfj8ZJjFB0FTM0YrJhpehQ&libraries=places&callback=initializeStreetView`;
+      googleMapsScript.async = true;
+      googleMapsScript.defer = true;
+      googleMapsScript.onerror = () => {
+        console.error('Failed to load Google Maps API');
+        setIsLoading(false);
+        setStreetViewAvailable(false);
+        toast({
+          title: "Error loading maps",
+          description: "Unable to load Google Maps. Please try again later.",
+          variant: "destructive"
+        });
+      };
+      
+      document.head.appendChild(googleMapsScript);
+      setScriptAdded(true);
+    };
+
+    loadMapsApi();
+
+    return () => {
+      // The cleanup will be handled in the other useEffect
+    };
+  }, [scriptAdded]);
 
   const toggleAudio = () => {
     setAudioEnabled(prev => !prev);
