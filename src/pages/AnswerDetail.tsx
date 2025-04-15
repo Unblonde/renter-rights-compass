@@ -17,7 +17,7 @@ const ANSWERS_DATA = [
     category: 'Renter Rights',
     question: 'What are my basic rights as a tenant?',
     shortAnswer: 'Tenants have the right to a safe, habitable home, privacy, protection from unfair eviction, and proper handling of deposits.',
-    fullAnswer: 'As a tenant in the UK, you have several fundamental rights protected by law. These include the right to live in a property that's safe and in good repair, the right to have your deposit protected in a government-approved scheme, the right to challenge excessively high charges, protection from unfair eviction and rent increases, the right to live in the property undisturbed, and the right to see the property's Energy Performance Certificate. Your landlord must also provide a gas safety certificate, ensure electrical safety, and provide smoke and carbon monoxide alarms.',
+    fullAnswer: 'As a tenant in the UK, you have several fundamental rights protected by law. These include the right to live in a property that\'s safe and in good repair, the right to have your deposit protected in a government-approved scheme, the right to challenge excessively high charges, protection from unfair eviction and rent increases, the right to live in the property undisturbed, and the right to see the property\'s Energy Performance Certificate. Your landlord must also provide a gas safety certificate, ensure electrical safety, and provide smoke and carbon monoxide alarms.',
     tags: ['rights', 'tenant', 'basics', 'protection']
   },
   {
@@ -25,7 +25,7 @@ const ANSWERS_DATA = [
     category: 'Deposits and Fees',
     question: 'How does deposit protection work?',
     shortAnswer: 'Landlords must protect tenant deposits in a government-approved scheme within 30 days of receiving it.',
-    fullAnswer: 'Landlords must protect deposits using a government-approved tenancy deposit scheme (TDP) within 30 days of receiving it. They must also provide tenants with information about how their deposit is protected, including which scheme was used, how to apply for the deposit's return, what to do in case of a dispute, and reasons why deductions might be made. At the end of the tenancy, the deposit must be returned within 10 days of agreeing with the tenant how much will be returned. If there's a dispute, the deposit will remain protected in the TDP scheme until the issue is resolved. If a landlord fails to protect a deposit, they may be ordered to repay it to the tenant plus a penalty of up to 3 times the deposit amount.',
+    fullAnswer: 'Landlords must protect deposits using a government-approved tenancy deposit scheme (TDP) within 30 days of receiving it. They must also provide tenants with information about how their deposit is protected, including which scheme was used, how to apply for the deposit\'s return, what to do in case of a dispute, and reasons why deductions might be made. At the end of the tenancy, the deposit must be returned within 10 days of agreeing with the tenant how much will be returned. If there\'s a dispute, the deposit will remain protected in the TDP scheme until the issue is resolved. If a landlord fails to protect a deposit, they may be ordered to repay it to the tenant plus a penalty of up to 3 times the deposit amount.',
     tags: ['deposit', 'protection', 'fees', 'money']
   },
   {
